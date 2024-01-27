@@ -1,7 +1,10 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Handover</a>
+        <a class="navbar-brand" href="/">
+            <img src="./icons/IconLogo.png" width="28" height="28" style="margin-right: 8px;">
+            <text class="fw-bold">Handover</text>
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -36,6 +39,12 @@
   </script>
   
   <style scoped>
-  /* Add any custom styles for your navbar here */
-  </style>
+  .navbar.navbar-light{
+    background-color: white!important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+ }  
+ .container {
+    margin-left:15px;
+ }
+</style>
   
