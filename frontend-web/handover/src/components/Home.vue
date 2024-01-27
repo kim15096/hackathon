@@ -15,4 +15,10 @@
     },
   };
   </script>
+
+<style>
+body{
+    background: #d9d9d9; /* not apply if you go from page-1 to page-2 */
+   }
+</style>
   

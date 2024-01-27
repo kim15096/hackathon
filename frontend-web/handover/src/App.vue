@@ -2,6 +2,11 @@
   <div class="app-navbar">
     <Navbar/>
   </div>
+  <div>
+    <div class="app-left-column">
+      <LeftColumn />
+    </div>
+  </div>
   <router-view></router-view>
 </template>
 
@@ -37,5 +42,14 @@ body{
   left: 0;
   top: 0; /* To make it stick to the very left of the page */
   width: 100vw; /* Adjust the width as needed */
+}
+
+.app-left-column {
+  position: fixed;
+  left: 0;
+  top: 60px; /* Adjust the top position to match the Navbar height */
+  width: 200px; /* Adjust the width as needed */
+  background-color: #f0f0f0; /* Optional: Set a background color for the LeftColumn */
+  z-index: 2; /* Ensure LeftColumn is above other content except Navbar */
 }
 </style>
