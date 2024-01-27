@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+/backend/env
+/backend/__pycache__
 
 # local env files
 .env.local
