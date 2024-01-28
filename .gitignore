@@ -3,6 +3,7 @@ node_modules
 /dist
 /backend/env
 /backend/__pycache__
+/backend/yolo_files/yolov3.weights
 
 # local env files
 .env.local
