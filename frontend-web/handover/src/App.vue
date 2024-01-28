@@ -3,7 +3,7 @@
     <Navbar/>
   </div>
   <div>
-    <div class="app-left-column">
+    <div class="app-left-column mt-1" >
       <LeftColumn />
     </div>
   </div>
@@ -49,7 +49,6 @@ body{
   left: 0;
   top: 60px; /* Adjust the top position to match the Navbar height */
   width: 200px; /* Adjust the width as needed */
-  background-color: #f0f0f0; /* Optional: Set a background color for the LeftColumn */
   z-index: 2; /* Ensure LeftColumn is above other content except Navbar */
 }
 </style>

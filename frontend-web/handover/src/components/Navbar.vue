@@ -42,6 +42,7 @@ export default {
 .navbar.navbar-light{
   background-color: white!important;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+  height: 60px;
 }  
 .container {
   margin-left:15px;

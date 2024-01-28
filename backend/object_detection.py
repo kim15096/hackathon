@@ -16,12 +16,24 @@ Example: python3 yolo_img_detector.py -f imgs/beach.jpg -w yolo_files/yolov3.wei
 import os
 import cv2
 import numpy as np
+import math
 
 # TODO: Phase 1
 import sys
 
 probability_minimum = 0.5
 threshold = 0.3
+
+# Categories:
+categories_hash = {
+    "Electronics": ["mouse"],
+    "Clothing": [],
+    "Furniture": [],
+    "Beauty": [],
+    "Accessories": [],
+    "Music & Sport": [],
+    "School": []
+}
 
 class Object_Detection():
     def __init__(self):
@@ -70,6 +82,8 @@ class Object_Detection():
     # Function to draw bounding boxes and save annotated images
     def save_annotated_image(self, image, bounding_boxes, confidences, classes, image_path, labels):
         annotated_image = image.copy()
+        image_x, image_y, channels = annotated_image.shape
+
         results = cv2.dnn.NMSBoxes(bounding_boxes, confidences, probability_minimum, threshold)
         
         # Get final classes and bounding boxes and confidences after NMS
@@ -83,12 +97,20 @@ class Object_Detection():
             final_classes.append(classes[i])
         
         coco_labels = 80
+        
+        min_dist_class = ''
+        min_dist = 999999
         np.random.seed(42)
         colours = np.random.randint(0, 255, size=(coco_labels, 3), dtype='uint8')
         if len(results) > 0:
             for i in results.flatten():
                 x_min, y_min = bounding_boxes[i][0], bounding_boxes[i][1]
                 box_width, box_height = bounding_boxes[i][2], bounding_boxes[i][3]
+                dist_to_center = math.sqrt(((x_min+box_width/2)-image_x/2)**2 + ((y_min+box_height/2)-image_y/2)**2)
+                if dist_to_center < min_dist:
+                    min_dist = dist_to_center
+                    min_dist_class = classes[i]
+                
                 colour_box = [int(j) for j in colours[classes[i]]]
                 label = labels[classes[i]]
                 cv2.rectangle(annotated_image, (x_min, y_min), (x_min + box_width, y_min + box_height), colour_box, 5)
@@ -96,9 +118,8 @@ class Object_Detection():
         # Save annotated image with '_out' suffix
         annotated_image_path = os.path.join('out_imgs', os.path.basename(image_path).replace('.jpg', '_out.jpg'))
         cv2.imwrite(annotated_image_path, annotated_image)
-        print(f"Annotated image saved as {annotated_image_path}")
 
-        return final_classes
+        return min_dist_class
 
     def process_images(self, image_path):
         # Initialize variables
@@ -117,16 +138,11 @@ class Object_Detection():
         # Start the YOLO network
         bounding_boxes, confidences, classes = self.yolo(image)
         # Annotate image and save file
-        final_classes = self.save_annotated_image(image, bounding_boxes, confidences, classes, image_path, self.labels)
-        # Count for each class
-        for cls in final_classes:
-            class_hash[image_path][self.labels[cls]] = class_hash[image_path].get(self.labels[cls], 0) + 1
-        # Get total number of classes
-        total_classes_detected += len(final_classes)
+        final_class = self.save_annotated_image(image, bounding_boxes, confidences, classes, image_path, self.labels)
 
-        # If classes_all flag is True
-        print(f"Total Number of Classes Detected: {total_classes_detected}")
-
+        
+        class_hash[image_path][self.labels[final_class]] = class_hash[image_path].get(self.labels[final_class], 0) + 1
+            
         for img, objects in class_hash.items():
             # Iterate through each object in the image
             for object_name, count in objects.items():
@@ -137,12 +153,19 @@ class Object_Detection():
                 else:
                     total_counts[object_name] = count
         
-        print("\nTotal Detection Breakdown:")
+        final_obj_name = ''
         for obj_name, count in total_counts.items():
-            print(f"{obj_name}: {count}")
+            final_obj_name = obj_name
+            
+        item_to_find = final_obj_name
 
-        print("\nImage Breakdown:")        
-        return f"{image_path} => {' | '.join([f'{cls}: {class_hash[image_path][cls]}' for cls in class_hash[image_path]])}"
+        category_found = 'N/A'
+        
+        for category, items in categories_hash.items():
+            if item_to_find in items:
+                category_found = category
+        
+        return final_obj_name, category_found
 
 
 # if __name__ == '__main__':
