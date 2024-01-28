@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from supabase import create_client, Client
 from datetime import datetime
 import object_detection
+import auto_completion
 import jsonify
 from flask_cors import CORS
 import os
@@ -51,6 +52,22 @@ def detect_object():
         return [detected_object, category]
     except:
         return "ERROR"
+
+@app.route('/auto_complete', methods=['GET', 'POST'])
+def auto_complete():
+    data = request.json
+    
+    category = data['suggested_category']
+    item = data['item']
+    keywords = data['keywords']
+    
+    print(category)
+    print(item)
+    print(keywords)
+    
+    description = auto_completion.get_completion(item, category, keywords)
+    
+    return description
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
