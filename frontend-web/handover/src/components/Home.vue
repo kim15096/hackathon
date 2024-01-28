@@ -21,7 +21,7 @@
       <div class="modal-content">
         <div class="modal-header mt-2 p-1">
           <img class="ms-1" style="height: 40px; padding: 0px" src="./icons/IconBlitz.png">
-          <h1 class="modal-title fs-4 fw-bold ms-0" id="exampleModalLabel">Blitz Post</h1><p style="font-size:11px" class="ms-2">Powered by AI</p>
+          <h1 class="modal-title fs-3 fw-bold ms-0" id="exampleModalLabel">Blitz Post</h1><p style="font-size:11px" class="ms-2">Powered by AI</p>
           <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -47,8 +47,8 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-4 fw-bold" id="exampleModalToggleLabel2">🚀 Finalize</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-3 fw-bold" id="exampleModalToggleLabel2">✨ Finalize</h1>
+          <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <a style="display: block; font-weight: 600;">Price</a>

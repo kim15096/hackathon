@@ -3,7 +3,7 @@
     <div class="sticky-top">
       <!-- Add your category and filter elements here -->
       <h4 class="fw-bold"><img class="ms-3 me-3" src="./icons/IconSearch.png">Find your item</h4>
-      <div class="mt-3" style="width: 100%; height: 1px; background: rgb(228, 228, 228)"></div>
+      <div class="mt-3" style="width: 100%; height: 1px; background: rgb(200, 200, 200)"></div>
       <div class="form-check form-switch ms-3 mt-4">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
         <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Certified</label>
@@ -19,6 +19,10 @@
       <button class="btn btn-outline-dark ms-3 mt-3">School Supplies</button>
       <button class="btn btn-outline-dark ms-3 mt-3">Accessories</button>
       <button class="btn btn-outline-dark ms-3 mt-3">Furniture</button>
+      <div class="mt-5" style="width: 100%; height: 1px; background: rgb(228, 228, 228)"></div>
+      <div class="mt-5"></div>
+      <img class="mt-5" style="width: 150px;" src="./icons/IconHandOver.png">
+      <p class="ms-4 mt-4 fw-normal" style="font-size: 14px; color:rgb(97, 97, 97)">Hand over and earn money!</p>
     </div>
   </div>
 </template>

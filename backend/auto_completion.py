@@ -13,7 +13,7 @@ def get_completion(item, category, keywords):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a university student who is a seller on online marketplace. You will be given keywords to generate a listing based on the keywords in a semi-professional casual tone."},
-            {"role": "user", "content": f"You are selling a {item} which is in the category of {category}. Write a very short and very simple description (similar to how its done in facebook marketplace) of the listing using the following keywords: {keywords}. Keep it straightforward and minimal. Do not add quotation marks."}
+            {"role": "user", "content": f"You are selling a {item} which is in the category of {category}. Write a very short and very simple description (similar to how its done in facebook marketplace) of the listing using the following keywords: {keywords}. Keep it straightforward and minimal. Do not add quotation marks. Never say fill in the blanks such as [] brackets."}
   ])
         
     return completion.choices[0].message.content
