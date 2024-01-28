@@ -1,18 +1,37 @@
 <template>
     <div class="grid-view">
-        <div class="items-item">
-            <Item />
+        <div v-for="item in items.slice().reverse()" :key="item.id" class="grid-item">
+          <img v-if="item.imageURL != '' | item.imageURL == null" style="border-radius: 2px; object-fit: cover; height: 90%; width: 100%;" :src="item.imageURL" data-bs-toggle="modal" data-bs-target="#detailModal" @click="this.handleSelectedItem(item)">
+          <img v-else style="opacity: 0.8; padding: 40px; border-radius: 2px; object-fit: cover; height: 95%; width: 100%;" src="./icons/IconPlaceholder.jpeg">
+
+          <div v-if="item.imageURL != '' | item.imageURL == null" class="d-flex pt-1 ps-2" style="width: 100%">
+          <text class="fw-bold" style="font-size: 15px;">${{item.price}}</text>
+          <text class="fw-normal ms-3" style="font-size: 14px;">Selling {{item.item}}</text>
+          <img class="mt-1 me-1" style="width: 16px; height: 16px; margin-left:auto;" src="./icons/IconVerified.png">
         </div>
-        <div v-for="item in items" :key="item.id" class="grid-item">
-            <div class="mb-5">       
-                <text>Date Posted: {{ item.date_posted }}</text>
-            </div>
-            {{ item.name }}
         </div>
     </div>
     <!-- Floating Action Button -->
     <div class="fab" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <button @click="handleFabClick">+</button>
+    </div>
+
+    <div class="modal" id="detailModal" tabindex="-1" v-if="this.selectedItem!=null">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-2 ms-2 mt-1">
+            <h3 class="pt-1 pb-0 mb-0">🏷️</h3>
+            <h5 class="modal-title fw-bold">&nbsp; &nbsp;Selling {{this.selectedItem.item}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img class="mb-3" :src="this.selectedItem.imageURL" style="height: 50vh; width: 100%; object-fit: cover;" >
+            <text class="fw-bold d-block">${{this.selectedItem.price}}</text>
+            <text class="fw-bold" style="font-size:15px;">Category - {{this.selectedItem.category}}</text>
+            <p class="mt-2">{{this.selectedItem.desc}}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal -->
@@ -61,7 +80,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-light" data-bs-target="#exampleModal" data-bs-toggle="modal">Back</button>          
-          <button v-if="this.description!=''" type="button" class="btn btn-primary ms-1">Post</button>
+          <button v-if="this.description!=''" type="button" class="btn btn-primary ms-1" data-bs-dismiss="modal" @click="post">Post</button>
         </div>  
       </div>
     </div>
@@ -77,31 +96,32 @@ export default {
 
     data() {
         return {
+            id: 100,
             description: "",
             suggested_category: "",
             upload_title: "Select photo",
             uploadedFile: null,
             keywords: "",
+            selectedItem: null, 
             detected_item: "none",
             items: [
-                { id: 0, name: 'Item 0' },
-                { id: 1, name: 'Item 2' },
-                { id: 2, name: 'Item 3' },                
-                { id: 3, name: 'Item 1' },
-                { id: 22, name: 'Item 2' },
-                { id: 32, name: 'Item 3' },
-                { id: 13, name: 'Item 1' },
-                { id: 23, name: 'Item 2' },
-                { id: 33, name: 'Item 3' },
-                { id: 14, name: 'Item 1' },
-                { id: 24, name: 'Item 2' },
-                { id: 34, name: 'Item 3' },                
-                { id: 15, name: 'Item 1' },
-                { id: 25, name: 'Item 2' },
-                { id: 35, name: 'Item 3' },
-                { id: 16, name: 'Item 1' },
-                { id: 26, name: 'Item 2' },
-                { id: 36, name: 'Item 3' },
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},               
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},               
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},      
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},               
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
+                { id: 0, name: 'Item 0', price: 50, desc: "Some description...", imageURL: ""},
             ],
         };
     },
@@ -113,6 +133,16 @@ export default {
     },
   },
     methods: {
+        post(){
+          this.items.push({id: this.id, price: this.price, desc: this.description, imageURL: this.uploadedFileUrl, item: this.detected_item, category: this.suggested_category})
+          this.id += 1;
+          this.upload_title = "Select photo"
+          this.uploadedFile = ""
+          this.keywords = ""
+          this.description = ""
+          this.price = ""
+          this.suggested_category = ""
+        },
         handleImageUpload(event) {
             this.uploadedFile = event.target.files[0];
             this.uploadImage()
@@ -174,8 +204,8 @@ export default {
             fileInput.value = ''; // Clear the selected file
         }
     },
-    closeImageUploadDialog() {
-      this.$emit('close');
+    handleSelectedItem(item) {
+      this.selectedItem = item
     },
     },
 };
@@ -195,21 +225,23 @@ body{
 .grid-view {
     position: fixed;
     top: 65px;
-    left: 290px;
+    left: 265px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     overflow-y: auto;
     right: 0;
     padding-right: 15px;
     padding-bottom: 100px;
     max-height: 100vh;
-    gap: 16px;
+    gap: 6px;
 }
 
 .grid-item {
     background-color: #ffffff;
-    padding: 100px;
-    border-radius: 6px;
+    border-radius: 2px;
+    padding: 0px;
+    height: 15vw;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .fab {
@@ -222,7 +254,7 @@ body{
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 50%;
+    border-radius: 25%;
     width: 65px;
     height: 65px;
     font-size: 30px;

@@ -6,11 +6,11 @@
       <div class="mt-3" style="width: 100%; height: 1px; background: rgb(200, 200, 200)"></div>
       <div class="form-check form-switch ms-3 mt-4">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Certified</label>
+        <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Verified</label>
       </div>
       <div class="form-check form-switch ms-3 mt-2">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Borrow available</label>
+        <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Lending available</label>
       </div>
       <h5 class="fw-bold mt-5"><img style="height: 30px;" class="ms-3 me-3" src="./icons/IconCategories.png">Categories</h5>
       <button class="btn btn-outline-primary ms-3 mt-3">Electronics</button>
@@ -38,7 +38,7 @@ export default {
   position: sticky;
   top: 0;
   height: 100vh;
-  width: 275px;
+  width: 250px;
   padding: 20px 0 20px 0;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
   border-radius: 0px 4px 4px 0px;
